@@ -1,59 +1,122 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
+import { AuthContext } from '../../provider/AuthProvider';
+import { FaPersonFalling } from 'react-icons/fa6';
 
 const Navbar = () => {
+    const navigate = useNavigate();
+    const { user, logOut } = useContext(AuthContext);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const location = useLocation();
+
+
+    useEffect(() => {
+        setIsDropdownOpen(false);
+    }, [location]);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                console.log('Successfully signed out');
+                navigate('/');
+            })
+            .catch((error) => {
+                console.error('Failed to sign out:', error.message);
+            });
+    };
+
+    const linkClasses = ({ isActive }) =>
+        isActive
+            ? 'text-indigo-700 font-semibold '
+            : 'hover:text-indigo-600';
+
     return (
-        <div className="navbar bg-base-100">
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h8m-8 6h16" />
-                        </svg>
-                    </div>
-                    <ul
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <a>Parent</a>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Item 3</a></li>
-                    </ul>
+        <nav className="bg-white text-black shadow-md ">
+            <div className="container mx-auto px-4 py-4 flex justify-between items-center ">
+
+                <div className="text-2xl text-indigo-700 font-semibold cursor-pointer flex items-center justify-center gap-1">
+                    <FaPersonFalling />
+                    <NavLink to="/">Volunteero</NavLink>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+
+
+                <div className="flex items-center gap-6">
+                    <NavLink to="/" className={linkClasses}>
+                        Home
+                    </NavLink>
+                    <NavLink to="/allVolunteer" className={linkClasses}>
+                        All Volunteer
+                    </NavLink>
+
+
+                    <div className="relative">
+                        <button
+                            onClick={() => setIsDropdownOpen((prev) => !prev)}
+                            className="hover:text-indigo-700 "
+                        >
+
+                            My Profile
+
+
+                        </button>
+                        {isDropdownOpen && (
+                            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg z-10">
+                                <NavLink
+                                    to="/addVolunteer"
+                                    className="block px-4 py-2 hover:text-indigo-500"
+                                >
+                                    Add Volunteer
+                                </NavLink>
+                                <NavLink
+                                    to="/manageMyPosts"
+                                    className="block px-4 py-2 hover:text-indigo-500"
+                                >
+                                    Manage My Posts
+                                </NavLink>
+                            </div>
+                        )}
+                    </div>
+
+
+
+                    <div className="relative">
+                        {
+                            user ? (
+                                <div
+                                    className="flex items-center gap-3 cursor-pointer"
+                                    onMouseEnter={() => setIsHovered(true)}
+                                    onMouseLeave={() => setIsHovered(false)}
+                                >
+                                    <img
+                                        src={user.photoURL}
+                                        alt=""
+                                        className="w-10 h-10 rounded-full border-2 border-indigo-700"
+                                    />
+                                    {isHovered && (
+                                        <div className="absolute top-12 left-0 bg-gray-800 text-white px-3 py-1 rounded-md shadow-lg">
+                                            {user.displayName || 'User'}
+                                        </div>
+                                    )}
+                                    <button
+                                        onClick={handleLogOut}
+                                        className="px-4 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
+                                    >
+                                        Log Out
+                                    </button>
+                                </div>
+                            ) : (
+                                <Link
+                                    to="/auth/login"
+                                    className="px-4 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
+                                >
+                                    Login
+                                </Link>
+                            )}
+                    </div>
+                </div>
             </div>
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
-                    <li><a>Item 1</a></li>
-                    <li>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li><a>Item 3</a></li>
-                </ul>
-            </div>
-            <div className="navbar-end">
-                <a className="btn">Button</a>
-            </div>
-        </div>
+        </nav>
     );
 };
 
