@@ -10,9 +10,8 @@ const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const location = useLocation();
 
-
     useEffect(() => {
-        setIsDropdownOpen(false);
+        setIsDropdownOpen(false); 
     }, [location]);
 
     const handleLogOut = () => {
@@ -32,15 +31,16 @@ const Navbar = () => {
             : 'hover:text-indigo-600';
 
     return (
-        <nav className="bg-white text-black shadow-md ">
-            <div className="container mx-auto px-4 py-4 flex justify-between items-center ">
+        <nav className="bg-white text-black shadow-md">
+            <div className="container mx-auto px-4 py-4 flex justify-between items-center">
 
-                <div className="text-2xl text-indigo-700 font-semibold cursor-pointer flex items-center justify-center gap-1">
+                {/* Logo */}
+                <div className="text-2xl text-indigo-700 font-semibold cursor-pointer flex items-center gap-1">
                     <FaPersonFalling />
                     <NavLink to="/">Volunteero</NavLink>
                 </div>
 
-
+                {/* Navigation Links */}
                 <div className="flex items-center gap-6">
                     <NavLink to="/" className={linkClasses}>
                         Home
@@ -49,16 +49,13 @@ const Navbar = () => {
                         All Volunteer
                     </NavLink>
 
-
+                    {/* My Profile Dropdown */}
                     <div className="relative">
                         <button
                             onClick={() => setIsDropdownOpen((prev) => !prev)}
-                            className="hover:text-indigo-700 "
+                            className="hover:text-indigo-700"
                         >
-
                             My Profile
-
-
                         </button>
                         {isDropdownOpen && (
                             <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg z-10">
@@ -78,41 +75,52 @@ const Navbar = () => {
                         )}
                     </div>
 
-
-
+                    {/* User Profile */}
                     <div className="relative">
-                        {
-                            user ? (
+                        {user ? (
+                            <div className="relative flex items-center gap-3 cursor-pointer">
+                              
                                 <div
-                                    className="flex items-center gap-3 cursor-pointer"
+                                    className="relative"
                                     onMouseEnter={() => setIsHovered(true)}
-                                    onMouseLeave={() => setIsHovered(false)}
+                                    onMouseLeave={() => setIsHovered(true)}
                                 >
                                     <img
                                         src={user.photoURL}
-                                        alt=""
+                                      
                                         className="w-10 h-10 rounded-full border-2 border-indigo-700"
                                     />
+                                   
                                     {isHovered && (
-                                        <div className="absolute top-12 left-0 bg-gray-800 text-white px-3 py-1 rounded-md shadow-lg">
-                                            {user.displayName || 'User'}
+                                        <div className="absolute top-12 left-0 z-10 bg-gray-400 text-white px-2 py-1 rounded-md shadow-lg">
+                                            <div className="mb-2 px-2 w-[100px]">{user.displayName || 'User'}</div>
+                                            <button
+                                                onClick={handleLogOut}
+                                                className="w-full px-2 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
+                                            >
+                                                Log Out
+                                            </button>
                                         </div>
                                     )}
-                                    <button
-                                        onClick={handleLogOut}
-                                        className="px-4 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
-                                    >
-                                        Log Out
-                                    </button>
                                 </div>
-                            ) : (
-                                <Link
-                                    to="/auth/login"
+                                
+                                <button
+                                    onClick={handleLogOut}
                                     className="px-4 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
                                 >
-                                    Login
-                                </Link>
-                            )}
+                                    Log Out
+                                </button>
+                            </div>
+                        ) : (
+                           
+                            <Link
+                                to="/auth/login"
+                                className="px-4 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
+                            >
+                                Login
+                            </Link>
+                        )}
+
                     </div>
                 </div>
             </div>
