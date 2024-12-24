@@ -49,6 +49,11 @@ const Navbar = () => {
                         All Volunteer
                     </NavLink>
 
+                    <NavLink to="/blogSection" className={linkClasses}>
+                       Blog
+                    </NavLink>
+
+
                   
                     <div className="relative">
                         <button

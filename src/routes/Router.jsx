@@ -9,6 +9,7 @@ import AllVolunteers from "../components/allVolunteers/AllVolunteers";
 
 import ManageMyPosts from "../components/manageMyPosts/ManageMyPosts";
 import AddVolunteerPost from "../components/addVolunteer/AddVolunteerPost";
+import BlogSection from "../pages/blogSection/BlogSection";
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +24,11 @@ export const router = createBrowserRouter([
         {
             path: "/allVolunteer",
             element: <AllVolunteers></AllVolunteers>
+        },
+
+        {
+            path : "/blogSection",
+            element: <BlogSection></BlogSection>
         },
 
         {
