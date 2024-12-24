@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 import 'react-datepicker/dist/react-datepicker.css';
+import toast from 'react-hot-toast';
 
 const AddVolunteerPost = () => {
     const { user } = useContext(AuthContext);
@@ -22,7 +23,24 @@ const AddVolunteerPost = () => {
         };
 
         console.log('Form Data:', postData);
-        // You can add API submission logic here
+
+
+        // API submission logic here
+
+        fetch('http://localhost:5000/volunteers',{
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json',
+            },
+            body : JSON.stringify(postData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if (data.insertedId) {
+                toast.success('volunteer post successfully added');
+            }
+        });
     };
 
     return (
