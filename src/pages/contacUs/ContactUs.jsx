@@ -1,30 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const ContactUs = () => {
-    const [contactDetails, setContactDetails] = useState({});
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-    const [messageSent, setMessageSent] = useState(false);
 
-    useEffect(() => {
-       
-        axios.get('http://localhost:5000/contact-details')
-            .then((response) => {
-                setContactDetails(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching contact details:', error);
-            });
-    }, []);
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+   
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-   
+
         axios.post('http://localhost:5000/contact-form', formData)
             .then(() => {
                 setMessageSent(true);
-                setFormData({ name: '', email: '', message: '' }); 
+                setFormData({ name: '', email: '', message: '' });
+                toast.success('message received successfully')
             })
             .catch((error) => {
                 console.log(error);
@@ -42,15 +35,15 @@ const ContactUs = () => {
                 Have any questions or want to get involved? Reach out to us!
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            
+
                 <div className="bg-white p-4 rounded-lg shadow-md">
                     <h3 className="text-xl font-semibold text-indigo-700">Contact Details</h3>
-                    <p className="text-gray-600 mt-2"><strong>Email:</strong> {contactDetails.email || 'Loading...'}</p>
-                    <p className="text-gray-600 mt-2"><strong>Phone:</strong> {contactDetails.phone || 'Loading...'}</p>
-                    <p className="text-gray-600 mt-2"><strong>Address:</strong> {contactDetails.address || 'Loading...'}</p>
+                    <p className="text-gray-600 mt-2"><strong>Email:</strong> support@volunteer.org</p>
+                    <p className="text-gray-600 mt-2"><strong>Phone:</strong> +123-456-7890</p>
+                    <p className="text-gray-600 mt-2"><strong>Address:</strong> 123 Volunteer, Bangladesh</p>
                 </div>
 
-        
+
                 <div className="bg-white p-4 rounded-lg shadow-md">
                     <h3 className="text-xl font-semibold text-indigo-700">Get in Touch</h3>
                     <form className="mt-4" onSubmit={handleSubmit}>
@@ -87,7 +80,7 @@ const ContactUs = () => {
                         >
                             Send Message
                         </button>
-                        {messageSent && <p className="text-green-600 mt-2">Thank you! Your message has been sent.</p>}
+                       
                     </form>
                 </div>
             </div>
