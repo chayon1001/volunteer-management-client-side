@@ -6,8 +6,9 @@ import Home from "../pages/Home";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import AllVolunteers from "../components/allVolunteers/AllVolunteers";
-import AddVolunteer from "../components/addVolunteer/AddVolunteer";
+
 import ManageMyPosts from "../components/manageMyPosts/ManageMyPosts";
+import AddVolunteerPost from "../components/addVolunteer/AddVolunteerPost";
 
 export const router = createBrowserRouter([
     {
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
 
         {
             path: "/addVolunteer",
-            element: <AddVolunteer></AddVolunteer>
+            element: <AddVolunteerPost></AddVolunteerPost>
 
         },
         {
