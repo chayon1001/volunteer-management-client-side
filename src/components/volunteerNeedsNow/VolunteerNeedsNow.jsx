@@ -40,7 +40,7 @@ const VolunteerNeedsNow = () => {
                             <p className="text-gray-600 text-sm">Deadline: {new Date(post.deadline).toLocaleDateString()}</p>
                             <button
                                 className="mt-4 px-4 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800"
-                                onClick={() => navigate(`/volunteer/${post._id}`)}
+                                onClick={() => navigate(`/volunteers/${post._id}`)}
                             >
                                 View Details
                             </button>
