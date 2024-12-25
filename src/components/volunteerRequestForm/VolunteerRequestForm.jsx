@@ -4,21 +4,18 @@ import axios from 'axios';
 import { AuthContext } from '../../provider/AuthProvider';
 import toast from 'react-hot-toast';
 
-const VolunteerRequestForm = ({propPost}) => {
+const VolunteerRequestForm = ({ propPost }) => {
 
-    const navigate = useNavigate()
-
-   
-    const { id } = useParams(); 
-    const [postData, setPostData] = useState(null);  // Renamed local state to postData
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const [postData, setPostData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [suggestion, setSuggestion] = useState('');
+    const { user } = useContext(AuthContext);
 
-    const { user } = useContext(AuthContext); 
-
-    // Only fetch data if no post data is passed as a prop
     useEffect(() => {
+        console.log("Fetched ID:", id); // Debug the ID
         if (!propPost) {
             axios
                 .get(`http://localhost:5000/volunteers/${id}`)
@@ -32,7 +29,7 @@ const VolunteerRequestForm = ({propPost}) => {
                     setLoading(false);
                 });
         } else {
-            setPostData(propPost);  // Use the prop post if it's passed
+            setPostData(propPost);
             setLoading(false);
         }
     }, [id, propPost]);
@@ -82,10 +79,7 @@ const VolunteerRequestForm = ({propPost}) => {
 
                 if (data && data.insertedId) {
                     toast.success('Request post successfully added');
-                    navigate('/')
-                   
-                  
-                   
+                    navigate('/');
                 } else {
                     toast.error('Failed to submit request. Please try again.');
                 }
