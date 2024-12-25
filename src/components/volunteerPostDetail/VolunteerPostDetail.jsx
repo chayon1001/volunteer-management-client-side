@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const VolunteerPostDetail = () => {
+
+    const navigate = useNavigate(); // Initialize navigate function
+
+  const handleVolunteerClick = () => {
+    navigate(`/volunteer-request/${post._id}`); // Navigate to the volunteer request form with the post ID
+  };
+
+
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -51,7 +59,7 @@ const VolunteerPostDetail = () => {
       <p className="text-gray-600 mb-4">
         <strong>Description:</strong> {post.description}
       </p>
-      <button
+      <button  onClick={handleVolunteerClick}
         className="px-6 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800 mt-4"
       >
         Be a Volunteer
