@@ -95,7 +95,7 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider value={authInfo}>
             <Toaster />
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     );
 };

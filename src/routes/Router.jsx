@@ -13,6 +13,7 @@ import BlogSection from "../pages/blogSection/BlogSection";
 import ContactUs from "../pages/contacUs/ContactUs";
 import VolunteerPostDetail from "../components/volunteerPostDetail/VolunteerPostDetail";
 import VolunteerRequestForm from "../components/volunteerRequestForm/VolunteerRequestForm";
+import UpdatePost from "../components/updatePost/UpdatePost";
 
 export const router = createBrowserRouter([
     {
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
         {
             path: '/manageMyPosts',
             element: <ManageMyPosts></ManageMyPosts>
+        },
+        {
+            path: '/update/:id',
+            element: <UpdatePost></UpdatePost>  
         },
         {
             path: '/auth/register',

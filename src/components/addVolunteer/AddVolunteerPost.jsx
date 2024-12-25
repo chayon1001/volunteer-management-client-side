@@ -149,7 +149,7 @@ const AddVolunteerPost = () => {
                     />
                 </div>
 
-                {/* Add Post Button */}
+             
                 <button
                     type="submit"
                     className="w-full px-4 py-2 bg-indigo-700 text-white font-semibold rounded-md hover:bg-indigo-800"
