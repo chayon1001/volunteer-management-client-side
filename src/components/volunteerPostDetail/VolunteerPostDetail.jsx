@@ -1,47 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const VolunteerPostDetail = () => {
-
-    const navigate = useNavigate(); // Initialize navigate function
-
-  const handleVolunteerClick = () => {
-    navigate(`/volunteer-request/${post._id}`); // Navigate to the volunteer request form with the post ID
-  };
-
-
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Initialize the navigate function
 
   useEffect(() => {
-   
-    axios.get(`http://localhost:5000/volunteers/${id}`)
+    axios
+      .get(`http://localhost:5000/volunteers/${id}`)
       .then((response) => {
         setPost(response.data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err)
+        console.error('Error fetching post:', err);
+        setError('Failed to load post');
         setLoading(false);
       });
   }, [id]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const handleButtonClick = () => {
+    // Navigate to the new page for volunteer request, passing post ID
+    navigate(`/volunteer-request/${id}`);
+  };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md mt-10 mb-10">
+    <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md mt-10">
       <h1 className="text-3xl font-bold text-indigo-700 mb-6">{post.title}</h1>
       <img
         src={post.thumbnail}
+        alt={post.title}
         className="w-full h-60 object-cover rounded-lg mb-6"
       />
       <p className="text-gray-600 mb-4">
@@ -59,7 +54,8 @@ const VolunteerPostDetail = () => {
       <p className="text-gray-600 mb-4">
         <strong>Description:</strong> {post.description}
       </p>
-      <button  onClick={handleVolunteerClick}
+      <button
+        onClick={handleButtonClick}
         className="px-6 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800 mt-4"
       >
         Be a Volunteer
