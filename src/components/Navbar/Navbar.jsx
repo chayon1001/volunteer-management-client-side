@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import { FaPersonFalling } from 'react-icons/fa6';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { FaMoon, FaSun, FaBars, FaTimes } from 'react-icons/fa';
 import { ThemeContext } from '../../provider/themeContext/ThemeProvider';
 
 const Navbar = () => {
@@ -11,6 +11,7 @@ const Navbar = () => {
     const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
     const [isHovered, setIsHovered] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile menu toggle
     const location = useLocation();
 
     const handleThemeToggle = () => {
@@ -19,6 +20,7 @@ const Navbar = () => {
 
     useEffect(() => {
         setIsDropdownOpen(false);
+        setIsMenuOpen(false); // Close mobile menu on navigation
     }, [location]);
 
     const handleLogOut = () => {
@@ -38,8 +40,8 @@ const Navbar = () => {
             : 'hover:text-indigo-600';
 
     return (
-        <nav className="bg-white dark:bg-gray-800 text-black dark:text-white shadow-md">
-            <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <nav className="bg-white dark:bg-gray-800 text-black dark:text-white shadow-md py-4">
+            <div className="container mx-auto flex justify-around items-center  gap-6 pb-72 md:pb-0">
 
                 {/* Logo */}
                 <div className="text-2xl text-indigo-700 font-semibold cursor-pointer flex items-center gap-1">
@@ -47,47 +49,56 @@ const Navbar = () => {
                     <NavLink to="/">Volunteero</NavLink>
                 </div>
 
+                {/* Mobile Hamburger Menu Button */}
+                <div className="md:hidden ">
+                    <button
+                        onClick={() => setIsMenuOpen((prev) => !prev)}
+                        className="text-2xl focus:outline-none"
+                    >
+                        {isMenuOpen ? <FaTimes /> : <FaBars />}
+                    </button>
+                </div>
+
                 {/* Navigation Links */}
-                <div className="flex items-center gap-3">
-                    <NavLink to="/" className={linkClasses}>
+                <div
+                    className={`absolute md:static top-20 left-0 px-14 md:px-0 w-full md:w-auto bg-white dark:bg-gray-800 z-10 md:flex md:items-center md:gap-4 md:opacity-100 transition-all ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible md:visible'
+                        }`}
+                >
+                    <NavLink to="/" className={({ isActive }) => `${isActive ? 'text-indigo-700 font-semibold' : 'hover:text-indigo-600'} block md:py-0`}>
                         Home
                     </NavLink>
-                    <NavLink to="/allVolunteer" className={linkClasses}>
+                    <NavLink to="/allVolunteer" className={({ isActive }) => `${isActive ? 'text-indigo-700 font-semibold' : 'hover:text-indigo-600'} block md:py-0`}>
                         All Volunteer
                     </NavLink>
-
-                    <NavLink to="/myVolunteerRequestPost" className={linkClasses}>
+                    <NavLink to="/myVolunteerRequestPost" className={({ isActive }) => `${isActive ? 'text-indigo-700 font-semibold' : 'hover:text-indigo-600'} block`}>
                         My Volunteer Request Post
                     </NavLink>
-
-                    <NavLink to="/blogSection" className={linkClasses}>
+                    <NavLink to="/blogSection" className={({ isActive }) => `${isActive ? 'text-indigo-700 font-semibold' : 'hover:text-indigo-600'} block`}>
                         Blog
                     </NavLink>
-
-                    <NavLink to="/contactUs" className={linkClasses}>
+                    <NavLink to="/contactUs" className={({ isActive }) => `${isActive ? 'text-indigo-700 font-semibold' : 'hover:text-indigo-600'} block`}>
                         Contact Us
                     </NavLink>
 
-
-
+                    {/* My Profile Dropdown */}
                     <div className="relative">
                         <button
                             onClick={() => setIsDropdownOpen((prev) => !prev)}
-                            className="hover:text-indigo-700"
+                            className="block   hover:text-indigo-700"
                         >
                             My Profile
                         </button>
                         {isDropdownOpen && (
-                            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg z-10">
+                            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg z-20">
                                 <NavLink
                                     to="/addVolunteer"
-                                    className="block px-4 py-2 hover:text-indigo-500"
+                                    className="block px-2 py-2 hover:text-indigo-500"
                                 >
                                     Add Volunteer need Post
                                 </NavLink>
                                 <NavLink
                                     to="/manageMyPosts"
-                                    className="block px-4 py-2 hover:text-indigo-500"
+                                    className="block px-2 py-2 hover:text-indigo-500"
                                 >
                                     Manage My Posts
                                 </NavLink>
@@ -96,18 +107,17 @@ const Navbar = () => {
                     </div>
 
                     {/* User Profile */}
-                    <div className="relative">
+                    <div className="block px-2 py-2 md:py-0">
                         {user ? (
-                            <div className="relative flex items-center gap-3 cursor-pointer">
-
+                            <div className="flex items-center gap-3">
                                 <div
                                     className="relative"
                                     onMouseEnter={() => setIsHovered(true)}
-                                    onMouseLeave={() => setIsHovered(true)}
+                                    onMouseLeave={() => setIsHovered(false)} // Fixed this line for hover
                                 >
                                     <img
                                         src={user.photoURL}
-
+                                        alt=""
                                         className="w-10 h-10 rounded-full border-2 border-indigo-700"
                                     />
 
@@ -126,27 +136,27 @@ const Navbar = () => {
 
                                 <button
                                     onClick={handleLogOut}
-                                    className="px-4 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
+                                    className="px-3 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
                                 >
                                     Log Out
                                 </button>
                             </div>
                         ) : (
-
                             <Link
                                 to="/auth/login"
-                                className="px-4 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
+                                className="px-3 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
                             >
                                 Login
                             </Link>
                         )}
-
-
                     </div>
 
-                    <button onClick={handleThemeToggle} className="text-xl p-2">
-                        {isDarkMode ? <FaSun /> : <FaMoon />}
-                    </button>
+                    {/* Theme Toggle */}
+                    <div className="block px-2 py-2 md:py-0">
+                        <button onClick={handleThemeToggle} className="text-xl">
+                            {isDarkMode ? <FaSun /> : <FaMoon />}
+                        </button>
+                    </div>
                 </div>
             </div>
         </nav>
