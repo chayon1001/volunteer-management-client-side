@@ -14,6 +14,7 @@ import ContactUs from "../pages/contacUs/ContactUs";
 import VolunteerPostDetail from "../components/volunteerPostDetail/VolunteerPostDetail";
 import VolunteerRequestForm from "../components/volunteerRequestForm/VolunteerRequestForm";
 import UpdatePost from "../components/updatePost/UpdatePost";
+import MyVolunteerRequestPost from "../components/myVolunteerRequestPost/MyVolunteerRequestPost";
 
 export const router = createBrowserRouter([
     {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
         {
             path: '/update/:id',
             element: <UpdatePost></UpdatePost>  
+        },
+        {
+            path: '/myVolunteerRequestPost',
+            element: <MyVolunteerRequestPost></MyVolunteerRequestPost>
         },
         {
             path: '/auth/register',

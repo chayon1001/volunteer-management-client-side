@@ -46,7 +46,11 @@ const Navbar = () => {
                         Home
                     </NavLink>
                     <NavLink to="/allVolunteer" className={linkClasses}>
-                        All Volunteer
+                        All Volunteer 
+                    </NavLink>
+
+                    <NavLink to="/myVolunteerRequestPost" className={linkClasses}>
+                       Volunteer Request 
                     </NavLink>
 
                     <NavLink to="/blogSection" className={linkClasses}>
