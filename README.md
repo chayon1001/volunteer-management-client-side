@@ -73,3 +73,9 @@ ___
    - react-firebase-hooks: React hooks for Firebase operations.
 
    - jsonwebtoken (jwt-decode): For decoding and verifying JSON Web Tokens.
+
+4. Deployment
+
+   - firebase-tools: CLI tools for Firebase hosting and configuration.
+
+    
