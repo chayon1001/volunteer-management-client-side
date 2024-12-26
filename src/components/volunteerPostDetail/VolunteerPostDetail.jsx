@@ -8,7 +8,7 @@ const VolunteerPostDetail = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -25,7 +25,7 @@ const VolunteerPostDetail = () => {
   }, [id]);
 
   const handleButtonClick = () => {
-    // Navigate to the new page for volunteer request, passing post ID
+    // Navigate to the volunteer request form if volunteers are needed
     navigate(`/volunteer-request/${id}`);
   };
 
@@ -34,9 +34,9 @@ const VolunteerPostDetail = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md mt-10">
-        <Helmet>
-                <title>VolunteerPostDetails - Volunteer-management</title>
-            </Helmet>
+      <Helmet>
+        <title>Volunteer Post Details - Volunteer Management</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-indigo-700 mb-6">{post.title}</h1>
       <img
         src={post.thumbnail}
@@ -58,12 +58,18 @@ const VolunteerPostDetail = () => {
       <p className="text-gray-600 mb-4">
         <strong>Description:</strong> {post.description}
       </p>
-      <button
-        onClick={handleButtonClick}
-        className="px-6 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800 mt-4"
-      >
-        Be a Volunteer
-      </button>
+      {post.volunteersNeeded > 0 ? (
+        <button
+          onClick={handleButtonClick}
+          className="px-6 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800 mt-4"
+        >
+          Be a Volunteer
+        </button>
+      ) : (
+        <p className="text-red-600 font-semibold mt-4">
+          Volunteers are not needed for this post at the moment.
+        </p>
+      )}
     </div>
   );
 };
