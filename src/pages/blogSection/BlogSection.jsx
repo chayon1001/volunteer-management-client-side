@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 
 
@@ -26,6 +27,9 @@ const BlogSection = () => {
 
     return (
         <section className="bg-gray-50 py-10 px-6 rounded-lg shadow-md">
+            <Helmet>
+                <title>Blog - Volunteer-management</title>
+            </Helmet>
             <h2 className="text-3xl font-bold text-black text-center mb-6">Latest Blogs</h2>
             <p className="text-gray-600 text-lg text-center mb-8">
                 Stay informed and inspired with our latest blog posts on volunteering, its benefits, <br /> and how you can make a difference in your community.

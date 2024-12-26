@@ -15,70 +15,79 @@ import VolunteerPostDetail from "../components/volunteerPostDetail/VolunteerPost
 import VolunteerRequestForm from "../components/volunteerRequestForm/VolunteerRequestForm";
 import UpdatePost from "../components/updatePost/UpdatePost";
 import MyVolunteerRequestPost from "../components/myVolunteerRequestPost/MyVolunteerRequestPost";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
-      path: "/",
-      element: <MainLayout></MainLayout>,
-      errorElement: <ErrorElement></ErrorElement>,
-      children: [
-        {
-            path: '/',
-            element: <Home></Home>
-        },
-        {
-            path: "/allVolunteer",
-            element: <AllVolunteers></AllVolunteers>
-        },
+        path: "/",
+        element: <MainLayout></MainLayout>,
+        errorElement: <ErrorElement></ErrorElement>,
+        children: [
+            {
+                path: '/',
+                element: <Home></Home>
+            },
+            {
+                path: "/allVolunteer",
+                element: <AllVolunteers></AllVolunteers>
+            },
 
-        {
-            path : "/blogSection",
-            element: <BlogSection></BlogSection>
-        },
+            {
+                path: "/blogSection",
+                element: <BlogSection></BlogSection>
+            },
 
-        {
-            path : "/contactUs",
-            element: <ContactUs></ContactUs>
-        },
+            {
+                path: "/contactUs",
+                element: <ContactUs></ContactUs>
+            },
 
-        
-        
-        {
-            path: "/addVolunteer",
-            element: <AddVolunteerPost></AddVolunteerPost>
 
-        },
 
-        {
-            path: '/volunteers/:id',
-            element: <VolunteerPostDetail></VolunteerPostDetail>
-        },
+            {
+                path: "/addVolunteer",
+                element: <PrivateRoute>
+                    <AddVolunteerPost></AddVolunteerPost>
+                </PrivateRoute>
 
-        {
-            path: "/volunteer-request/:id",
-            element: <VolunteerRequestForm></VolunteerRequestForm>
+            },
 
-        },
-        {
-            path: '/manageMyPosts',
-            element: <ManageMyPosts></ManageMyPosts>
-        },
-        {
-            path: '/update/:id',
-            element: <UpdatePost></UpdatePost>  
-        },
-        {
-            path: '/myVolunteerRequestPost',
-            element: <MyVolunteerRequestPost></MyVolunteerRequestPost>
-        },
-        {
-            path: '/auth/register',
-            element: <Register></Register>
-        },
-        {
-            path: '/auth/login',
-            element: <Login></Login>
-        }
-      ]
+            {
+                path: '/volunteers/:id',
+                element: <PrivateRoute>
+                    <VolunteerPostDetail></VolunteerPostDetail>
+                </PrivateRoute>
+            },
+
+            {
+                path: "/volunteer-request/:id",
+                element: <VolunteerRequestForm></VolunteerRequestForm>
+
+            },
+            {
+                path: '/manageMyPosts',
+                element: <PrivateRoute>
+                    <ManageMyPosts></ManageMyPosts>
+                </PrivateRoute>
+            },
+            {
+                path: '/update/:id',
+                element: <PrivateRoute>
+                    <UpdatePost></UpdatePost>
+                </PrivateRoute>
+            },
+            {
+                path: '/myVolunteerRequestPost',
+                element: <MyVolunteerRequestPost></MyVolunteerRequestPost>
+            },
+            {
+                path: '/auth/register',
+                element: <Register></Register>
+            },
+            {
+                path: '/auth/login',
+                element: <Login></Login>
+            }
+        ]
     },
-  ]);
+]);

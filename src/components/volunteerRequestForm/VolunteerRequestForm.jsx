@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../provider/AuthProvider';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const VolunteerRequestForm = ({ propPost }) => {
 
@@ -94,6 +95,9 @@ const VolunteerRequestForm = ({ propPost }) => {
 
     return (
         <div className="max-w-lg mx-auto p-6 bg-gray-100 rounded-lg shadow-md mt-10">
+            <Helmet>
+                <title>VolunteerRequestForm - Volunteer-management</title>
+            </Helmet>
             <h1 className="text-2xl font-bold text-indigo-700 mb-4">Volunteer Request</h1>
 
             <form onSubmit={handleSubmit}>

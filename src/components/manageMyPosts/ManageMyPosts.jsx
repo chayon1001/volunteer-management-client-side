@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom'; // For navigation
 import { AuthContext } from '../../provider/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 const ManageMyPosts = () => {
   const { user } = useContext(AuthContext);
@@ -63,6 +64,9 @@ const ManageMyPosts = () => {
 
   return (
     <div className="container mx-auto px-4 py-6">
+        <Helmet>
+                <title>ManageMyPost - Volunteer-management</title>
+            </Helmet>
       <h2 className="text-2xl font-bold text-center mb-6">Manage my post</h2>
       {posts.length === 0 ? (
         <p className="text-center text-gray-600">No volunteer posts found. Create one to get started.</p>

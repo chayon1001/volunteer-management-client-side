@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import DatePicker from 'react-datepicker'; 
 import 'react-datepicker/dist/react-datepicker.css';
 import { AuthContext } from '../../provider/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 const UpdatePost = () => {
   const { id } = useParams(); 
@@ -48,6 +49,9 @@ const UpdatePost = () => {
   
   return (
     <div className="container mx-auto px-4 py-6">
+        <Helmet>
+                <title>Update-Post - Volunteer-management</title>
+            </Helmet>
       <h2 className="text-2xl font-bold mb-4 text-center">Update Volunteer Post</h2>
       <form onSubmit={handleUpdate} className="max-w-2xl mx-auto bg-white p-6 shadow-md rounded-md">
       

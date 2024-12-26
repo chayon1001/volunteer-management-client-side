@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 import 'react-datepicker/dist/react-datepicker.css';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const AddVolunteerPost = () => {
     const { user } = useContext(AuthContext);
@@ -45,6 +46,9 @@ const AddVolunteerPost = () => {
 
     return (
         <div className="max-w-4xl mx-auto bg-gray-200 p-6 rounded-lg shadow-md mt-20">
+            <Helmet>
+                <title>AddVolunteerPost - Volunteer-management</title>
+            </Helmet>
             <h2 className="text-2xl font-bold text-center text-indigo-700 mb-6">Add Volunteer Need Post</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Thumbnail URL */}

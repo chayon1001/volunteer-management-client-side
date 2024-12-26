@@ -3,58 +3,63 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../provider/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 
 
 const Login = () => {
     const navigate = useNavigate()
-    const {loginUser, setUser, logInWithGoogle} = useContext(AuthContext)
+    const { loginUser, setUser, logInWithGoogle } = useContext(AuthContext)
 
     const [error, setError] = useState({})
 
-    
 
-    const handleSubmit = (e)=>{
+
+    const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        
+
         const email = form.email.value;
         const password = form.password.value;
 
-       
+
 
         loginUser(email, password)
-        .then((result)=>{
-            const user = result.user;
-            setUser(user);
-           navigate('/')
-           toast.success('Login successful!');
-           e.target.reset()
+            .then((result) => {
+                const user = result.user;
+                setUser(user);
+                navigate('/')
+                toast.success('Login successful!');
+                e.target.reset()
 
-        })
-        .catch((err) => {
-            setError({ ...error, login: err.code})
-            toast.error('Invalid email or password please try again')
-            
-          });
-        
+            })
+            .catch((err) => {
+                setError({ ...error, login: err.code })
+                toast.error('Invalid email or password please try again')
+
+            });
+
     }
 
-    const handleGoogleLogin = ()=>{
+    const handleGoogleLogin = () => {
         logInWithGoogle()
-        .then((res)=>{
-            setUser(res)
-            navigate('/')
-            toast.success('Login successful!');
-        })
-        .catch(error=>{
-            console.log("ERROR", error.message)
-        })
+            .then((res) => {
+                setUser(res)
+                navigate('/')
+                toast.success('Login successful!');
+            })
+            .catch(error => {
+                console.log("ERROR", error.message)
+            })
     }
 
-   
+
     return (
         <div className=" mt-5 rounded-lg bg-base-100 w-full max-w-lg mx-auto shrink-0 shadow-2xl pb-8">
+
+            <Helmet>
+                <title>Login - Volunteer-management</title>
+            </Helmet>
 
             <h2 className='text-2xl font-semibold text-center pt-4'>Login your account</h2>
             <form onSubmit={handleSubmit} className="card-body">
@@ -72,11 +77,11 @@ const Login = () => {
 
                 </div>
                 {
-                    error.login &&(
+                    error.login && (
                         <label className="label text-sm text-red-600">
                             {error.login}
-                    </label>
-                    ) 
+                        </label>
+                    )
                 }
                 <label className="label">
                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>

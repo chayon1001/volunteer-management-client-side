@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async';
 
 const VolunteerPostDetail = () => {
   const { id } = useParams();
@@ -33,6 +34,9 @@ const VolunteerPostDetail = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md mt-10">
+        <Helmet>
+                <title>VolunteerPostDetails - Volunteer-management</title>
+            </Helmet>
       <h1 className="text-3xl font-bold text-indigo-700 mb-6">{post.title}</h1>
       <img
         src={post.thumbnail}

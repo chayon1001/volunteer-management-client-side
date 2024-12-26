@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../provider/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -53,6 +54,9 @@ const Register = () => {
 
     return (
         <div className=" mt-5 rounded-lg bg-base-100 w-full max-w-lg mx-auto shrink-0 shadow-2xl">
+            <Helmet>
+                <title>Register - Volunteer-management</title>
+            </Helmet>
             <h2 className='text-2xl font-semibold text-center pt-4'>Register your account</h2>
             <form onSubmit={handleSubmit} className="card-body">
                 <div className="form-control">

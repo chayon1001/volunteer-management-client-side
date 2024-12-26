@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const MyVolunteerRequestPost = () => {
     const [requests, setRequests] = useState([]);
@@ -49,6 +50,9 @@ const MyVolunteerRequestPost = () => {
  
   return (
     <div className="container mx-auto px-4 py-6">
+        <Helmet>
+                <title>MyVolunteerRequestPost - Volunteer-management</title>
+            </Helmet>
       <h2 className="text-2xl font-bold text-center mb-6">Volunteer Requests</h2>
       {requests.length === 0 ? (
         <p className="text-center text-gray-600">No volunteer requests found.</p>

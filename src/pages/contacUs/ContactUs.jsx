@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const ContactUs = () => {
 
@@ -30,6 +31,9 @@ const ContactUs = () => {
 
     return (
         <section className="bg-gray-100 py-10 px-6 rounded-lg shadow-md mb-12">
+            <Helmet>
+                <title>Contact us - Volunteer-management</title>
+            </Helmet>
             <h2 className="text-3xl font-bold text-black text-center mb-6">Contact Us</h2>
             <p className="text-gray-600 text-lg text-center mb-6">
                 Have any questions or want to get involved? Reach out to us!
