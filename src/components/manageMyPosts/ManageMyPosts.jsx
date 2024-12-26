@@ -12,16 +12,13 @@ const ManageMyPosts = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const navigate = useNavigate(); // To navigate to the update page
+    const navigate = useNavigate(); 
 
     const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
         if (user?.email) {
-            //   axios
-            //     .get('http://localhost:5000/my-volunteer-posts', { params: { email: user.email },
-            //         withCredentials: true
-            //     })
+           
             axiosSecure.get('/my-volunteer-posts', { params: { email: user.email } })
                 .then((response) => {
                     setPosts(response.data);
@@ -49,7 +46,7 @@ const ManageMyPosts = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 axios
-                    .delete(`http://localhost:5000/delete-volunteer-post/${id}`)
+                    .delete(`https://volunteer-management-sever-side.vercel.app/delete-volunteer-post/${id}`)
                     .then(() => {
                         toast.success('Post deleted successfully');
                         setPosts(posts.filter((post) => post._id !== id));
@@ -62,7 +59,7 @@ const ManageMyPosts = () => {
     };
 
     const handleUpdate = (id) => {
-        navigate(`/update/${id}`); // Navigate to the UpdatePost component
+        navigate(`/update/${id}`); 
     };
 
     if (loading) return <div className="text-center text-lg">Loading...</div>;

@@ -11,22 +11,21 @@ const VolunteerRequestForm = ({ propPost }) => {
     const { id } = useParams();
     const [postData, setPostData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    
     const [suggestion, setSuggestion] = useState('');
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        console.log("Fetched ID:", id); // Debug the ID
+       
         if (!propPost) {
             axios
-                .get(`http://localhost:5000/volunteers/${id}`)
+                .get(`https://volunteer-management-sever-side.vercel.app/volunteers/${id}`)
                 .then((response) => {
                     setPostData(response.data);
                     setLoading(false);
                 })
                 .catch((err) => {
-                    console.error('Error fetching post:', err);
-                    setError(err.response?.data?.message || 'Failed to load post');
+                    console.log(err)
                     setLoading(false);
                 });
         } else {
@@ -67,7 +66,7 @@ const VolunteerRequestForm = ({ propPost }) => {
 
         console.log('Request Data:', requestData);
 
-        fetch('http://localhost:5000/request-volunteer', {
+        fetch('https://volunteer-management-sever-side.vercel.app/request-volunteer', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -91,7 +90,7 @@ const VolunteerRequestForm = ({ propPost }) => {
     };
 
     if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
+   
 
     return (
         <div className="max-w-lg mx-auto p-6 bg-gray-100 rounded-lg shadow-md mt-10">

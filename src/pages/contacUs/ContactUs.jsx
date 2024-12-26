@@ -14,7 +14,7 @@ const ContactUs = () => {
         e.preventDefault();
 
 
-        axios.post('http://localhost:5000/contact-form', formData)
+        axios.post(' https://volunteer-management-sever-side.vercel.app/contact-form', formData)
             .then(() => {
                 setMessageSent(true);
                 setFormData({ name: '', email: '', message: '' });

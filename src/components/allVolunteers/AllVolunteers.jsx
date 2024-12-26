@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { FaTh, FaTable } from 'react-icons/fa'; // Importing icons
+import { FaTh, FaTable } from 'react-icons/fa'; 
 
 const AllVolunteers = () => {
     const [posts, setPosts] = useState([]);
@@ -17,7 +17,7 @@ const AllVolunteers = () => {
 
     const fetchPosts = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/volunteersAll?search=${searchQuery}`);
+            const response = await axios.get(`https://volunteer-management-sever-side.vercel.app/volunteersAll?search=${searchQuery}`);
             setPosts(response.data);
         } catch (err) {
             console.log(err);

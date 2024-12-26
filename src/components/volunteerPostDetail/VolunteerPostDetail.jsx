@@ -13,7 +13,7 @@ const VolunteerPostDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/volunteers/${id}`)
+      .get(`https://volunteer-management-sever-side.vercel.app/volunteers/${id}`)
       .then((response) => {
         setPost(response.data);
         setLoading(false);
@@ -26,7 +26,7 @@ const VolunteerPostDetail = () => {
   }, [id]);
 
   const handleButtonClick = () => {
-    // Navigate to the volunteer request form if volunteers are needed
+    
     navigate(`/volunteer-request/${id}`);
   };
 

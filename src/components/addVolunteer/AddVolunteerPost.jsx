@@ -26,29 +26,12 @@ const AddVolunteerPost = () => {
             organizerEmail: user?.email || 'user@gmail.com',
         };
 
-        console.log('Form Data:', postData);
+        // console.log('Form Data:', postData);
 
 
-        // API submission logic here
-
-        //     fetch('http://localhost:5000/volunteers',{
-        //         method: 'POST',
-        //         headers: {
-        //             'content-type' : 'application/json',
-        //         },
-        //         body : JSON.stringify(postData)
-        //     })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         if (data.insertedId) {
-        //             toast.success('volunteer post successfully added');
-        //         }
-        //     });
-        // };
 
         axiosSecure
-            .post('/volunteers', postData) // POST request using the axios instance
+            .post('/volunteers', postData) 
             .then((response) => {
                 console.log(response.data);
                 if (response.data.insertedId) {

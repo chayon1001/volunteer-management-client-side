@@ -11,7 +11,7 @@ const MyVolunteerRequestPost = () => {
 
     useEffect(() => {
         axios
-            .get('http://localhost:5000/volunteer-requests')
+            .get('https://volunteer-management-sever-side.vercel.app/volunteer-requests')
             .then((response) => {
                 setRequests(response.data);
                 setLoading(false);
@@ -34,7 +34,7 @@ const MyVolunteerRequestPost = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 axios
-                    .delete(`http://localhost:5000/volunteer-requests/${id}`)
+                    .delete(`https://volunteer-management-sever-side.vercel.app/volunteer-requests/${id}`)
                     .then(() => {
                         toast.success('Request canceled successfully');
                         setRequests(requests.filter((request) => request._id !== id));

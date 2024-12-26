@@ -23,7 +23,7 @@ const UpdatePost = () => {
   useEffect(() => {
    
     axios
-      .get(`http://localhost:5000/volunteer-post/${id}`)
+      .get(`https://volunteer-management-sever-side.vercel.app/volunteer-post/${id}`)
       .then((response) => {
         setPost(response.data);
         setLoading(false);
