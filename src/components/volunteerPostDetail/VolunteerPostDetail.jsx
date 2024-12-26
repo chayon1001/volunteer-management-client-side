@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 
 const VolunteerPostDetail = () => {
+
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);

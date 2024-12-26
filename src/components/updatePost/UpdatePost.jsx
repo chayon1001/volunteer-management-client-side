@@ -6,8 +6,11 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { AuthContext } from '../../provider/AuthProvider';
 import { Helmet } from 'react-helmet-async';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const UpdatePost = () => {
+
+    const axiosSecure = useAxiosSecure()
   const { id } = useParams(); 
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
@@ -34,8 +37,8 @@ const UpdatePost = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
 
-    axios
-      .put(`http://localhost:5000/update-volunteer-post/${id}`, post)
+    axiosSecure
+      .put(`/update-volunteer-post/${id}`, post)
       .then(() => {
         toast.success('Post updated successfully');
         navigate('/manageMyPosts'); 

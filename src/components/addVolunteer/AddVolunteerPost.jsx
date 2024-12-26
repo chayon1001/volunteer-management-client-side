@@ -3,9 +3,12 @@ import { AuthContext } from '../../provider/AuthProvider';
 import 'react-datepicker/dist/react-datepicker.css';
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet-async';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const AddVolunteerPost = () => {
     const { user } = useContext(AuthContext);
+
+    const axiosSecure = useAxiosSecure()
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,21 +31,35 @@ const AddVolunteerPost = () => {
 
         // API submission logic here
 
-        fetch('http://localhost:5000/volunteers',{
-            method: 'POST',
-            headers: {
-                'content-type' : 'application/json',
-            },
-            body : JSON.stringify(postData)
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if (data.insertedId) {
-                toast.success('volunteer post successfully added');
-            }
-        });
+        //     fetch('http://localhost:5000/volunteers',{
+        //         method: 'POST',
+        //         headers: {
+        //             'content-type' : 'application/json',
+        //         },
+        //         body : JSON.stringify(postData)
+        //     })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         if (data.insertedId) {
+        //             toast.success('volunteer post successfully added');
+        //         }
+        //     });
+        // };
+
+        axiosSecure
+            .post('/volunteers', postData) // POST request using the axios instance
+            .then((response) => {
+                console.log(response.data);
+                if (response.data.insertedId) {
+                    toast.success('Volunteer post successfully added');
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            });
     };
+
 
     return (
         <div className="max-w-4xl mx-auto bg-gray-200 p-6 rounded-lg shadow-md mt-20">
@@ -153,7 +170,7 @@ const AddVolunteerPost = () => {
                     />
                 </div>
 
-             
+
                 <button
                     type="submit"
                     className="w-full px-4 py-2 bg-indigo-700 text-white font-semibold rounded-md hover:bg-indigo-800"
