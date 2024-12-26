@@ -30,7 +30,7 @@ const ContactUs = () => {
     };
 
     return (
-        <section className="bg-gray-100 py-10 px-6 rounded-lg shadow-md mb-12">
+        <section className="bg-gray-50 dark:bg-gray-900 py-10 px-6 rounded-lg shadow-md">
             <Helmet>
                 <title>Contact us - Volunteer-management</title>
             </Helmet>

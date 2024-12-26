@@ -2,16 +2,23 @@ import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import { FaPersonFalling } from 'react-icons/fa6';
+import { FaMoon, FaSun } from 'react-icons/fa';
+import { ThemeContext } from '../../provider/themeContext/ThemeProvider';
 
 const Navbar = () => {
     const navigate = useNavigate();
     const { user, logOut } = useContext(AuthContext);
+    const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
     const [isHovered, setIsHovered] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const location = useLocation();
 
+    const handleThemeToggle = () => {
+        setIsDarkMode((prevMode) => !prevMode);
+    };
+
     useEffect(() => {
-        setIsDropdownOpen(false); 
+        setIsDropdownOpen(false);
     }, [location]);
 
     const handleLogOut = () => {
@@ -31,7 +38,7 @@ const Navbar = () => {
             : 'hover:text-indigo-600';
 
     return (
-        <nav className="bg-white text-black shadow-md">
+        <nav className="bg-white dark:bg-gray-800 text-black dark:text-white shadow-md">
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
 
                 {/* Logo */}
@@ -41,28 +48,28 @@ const Navbar = () => {
                 </div>
 
                 {/* Navigation Links */}
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-3">
                     <NavLink to="/" className={linkClasses}>
                         Home
                     </NavLink>
                     <NavLink to="/allVolunteer" className={linkClasses}>
-                        All Volunteer 
+                        All Volunteer
                     </NavLink>
 
                     <NavLink to="/myVolunteerRequestPost" className={linkClasses}>
-                       Volunteer Request 
+                        My Volunteer Request Post
                     </NavLink>
 
                     <NavLink to="/blogSection" className={linkClasses}>
-                       Blog
+                        Blog
                     </NavLink>
 
                     <NavLink to="/contactUs" className={linkClasses}>
-                      Contact Us
+                        Contact Us
                     </NavLink>
 
 
-                  
+
                     <div className="relative">
                         <button
                             onClick={() => setIsDropdownOpen((prev) => !prev)}
@@ -92,7 +99,7 @@ const Navbar = () => {
                     <div className="relative">
                         {user ? (
                             <div className="relative flex items-center gap-3 cursor-pointer">
-                              
+
                                 <div
                                     className="relative"
                                     onMouseEnter={() => setIsHovered(true)}
@@ -100,10 +107,10 @@ const Navbar = () => {
                                 >
                                     <img
                                         src={user.photoURL}
-                                      
+
                                         className="w-10 h-10 rounded-full border-2 border-indigo-700"
                                     />
-                                   
+
                                     {isHovered && (
                                         <div className="absolute top-12 left-0 z-10 bg-gray-400 text-white px-2 py-1 rounded-md shadow-lg">
                                             <div className="mb-2 px-2 w-[100px]">{user.displayName || 'User'}</div>
@@ -116,7 +123,7 @@ const Navbar = () => {
                                         </div>
                                     )}
                                 </div>
-                                
+
                                 <button
                                     onClick={handleLogOut}
                                     className="px-4 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
@@ -125,7 +132,7 @@ const Navbar = () => {
                                 </button>
                             </div>
                         ) : (
-                           
+
                             <Link
                                 to="/auth/login"
                                 className="px-4 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
@@ -134,7 +141,12 @@ const Navbar = () => {
                             </Link>
                         )}
 
+
                     </div>
+
+                    <button onClick={handleThemeToggle} className="text-xl p-2">
+                        {isDarkMode ? <FaSun /> : <FaMoon />}
+                    </button>
                 </div>
             </div>
         </nav>

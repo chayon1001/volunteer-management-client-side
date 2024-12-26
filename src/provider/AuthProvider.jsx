@@ -19,6 +19,16 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+    useEffect(() => {
+        document.documentElement.className = theme;
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    };
 
     // Create User
     const createUser = async (email, password) => {
@@ -53,31 +63,24 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
 
-            console.log('state captured', currentUser?.email)
-
             if (currentUser?.email) {
-                const user = { email: currentUser.email }
+                const user = { email: currentUser.email };
 
                 axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
                     .then(res => {
-                        console.log(res.data)})
+                        console.log(res.data);
                         setLoading(false);
-            }
-            else {
+                    });
+            } else {
                 axios.post('http://localhost:5000/logout', {}, {
-                    withCredentials: true
+                    withCredentials: true,
                 })
                     .then(res => {
-                        console.log('logout', res.data)
-                    })
+                        console.log('logout', res.data);
+                    });
                 setLoading(false);
-
             }
-
-
-
         });
-
 
         return () => unsubscribe();
     }, []);
@@ -90,6 +93,8 @@ const AuthProvider = ({ children }) => {
         logOut,
         loading,
         logInWithGoogle,
+        theme,
+        toggleTheme,
     };
 
     return (

@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Default Light Mode Styles */
+:root {
+  --background-color-light: #ffffff;
+  --text-color-light: #000000;
+  --background-color-dark: #121212;
+  --text-color-dark: #ffffff;
+}
+
+/* Light Mode */
+body {
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+  font-family: 'Arial', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode */
+body.dark {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+
+.navbar {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Add other styles for light and dark modes */

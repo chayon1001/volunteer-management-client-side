@@ -26,7 +26,7 @@ const BlogSection = () => {
     ];
 
     return (
-        <section className="bg-gray-50 py-10 px-6 rounded-lg shadow-md">
+        <section className="bg-gray-50 dark:bg-gray-900 py-10 px-6 rounded-lg shadow-md ">
             <Helmet>
                 <title>Blog - Volunteer-management</title>
             </Helmet>

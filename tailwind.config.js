@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',  // Enables dark mode with class strategy
   theme: {
     extend: {},
   },
@@ -11,4 +12,3 @@ export default {
     require('daisyui'),
   ],
 }
-
