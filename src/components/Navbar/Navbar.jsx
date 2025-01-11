@@ -40,7 +40,7 @@ const Navbar = () => {
             : 'hover:text-indigo-600';
 
     return (
-        <nav className="bg-white dark:bg-gray-800 text-black dark:text-white shadow-md py-4">
+        <nav className="sticky top-0 z-50 bg-white dark:bg-gray-800 text-black dark:text-white shadow-md py-4">
             <div className="container mx-auto flex justify-around items-center  gap-6 pb-72 md:pb-0">
 
                 {/* Logo */}
