@@ -66,7 +66,7 @@ const ManageMyPosts = () => {
     if (error) return <div className="text-center text-red-500">{error}</div>;
 
     return (
-        <div className="container mx-auto px-4 py-6">
+        <div className="max-w-7xl mx-auto px-4 py-6">
             <Helmet>
                 <title>ManageMyPost - Volunteer-management</title>
             </Helmet>

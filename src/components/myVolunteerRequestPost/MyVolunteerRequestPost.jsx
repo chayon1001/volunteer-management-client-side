@@ -49,7 +49,7 @@ const MyVolunteerRequestPost = () => {
     if (loading) return <div className="text-center text-lg">Loading...</div>;
 
     return (
-        <div className="container mx-auto px-4 py-6">
+        <div className="max-w-7xl mx-auto px-4 py-6">
             <Helmet>
                 <title>MyVolunteerRequestPost - Volunteer-management</title>
             </Helmet>

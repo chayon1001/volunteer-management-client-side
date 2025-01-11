@@ -41,7 +41,7 @@ const AllVolunteers = () => {
     };
 
     return (
-        <div className="max-w-6xl mx-auto p-6 bg-gray-50 rounded-lg shadow-md mt-10">
+        <div className="max-w-7xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md mt-10 mb-10">
             <Helmet>
                 <title>All Volunteers - Volunteer Management</title>
             </Helmet>
@@ -105,7 +105,7 @@ const AllVolunteers = () => {
                 </div>
             ) : (
                 // Card Layout
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {posts.map((post) => (
                         <div
                             key={post._id}
@@ -122,7 +122,7 @@ const AllVolunteers = () => {
                                 onClick={() => handleViewDetails(post._id)}
                                 className="px-4 py-2 bg-indigo-700 text-white rounded hover:bg-indigo-800"
                             >
-                                View Details
+                                See More
                             </button>
                         </div>
                     ))}
