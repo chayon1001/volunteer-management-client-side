@@ -1,95 +1,107 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { Helmet } from 'react-helmet-async';
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 const ContactUs = () => {
+  const formRef = useRef();
 
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-   
+  const sendEmail = (e) => {
+    e.preventDefault();
 
+    emailjs
+      .sendForm(
+        "service_6ym4fwn", // Replace with your EmailJS service ID
+        "template_7tzmaii", // Replace with your EmailJS template ID
+        formRef.current,
+        "HSq4GqSVe303lSbrW" // Replace with your EmailJS public key
+      )
+      .then(
+        (result) => {
+          console.log("Email sent successfully:", result.text);
+          alert("Message sent successfully!");
+        },
+        (error) => {
+          console.error("Error sending email:", error.text);
+          alert("Failed to send message. Please try again.");
+        }
+      );
 
+    e.target.reset(); // Reset the form after submission
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-
-        axios.post(' https://volunteer-management-sever-side.vercel.app/contact-form', formData)
-            .then(() => {
-                setMessageSent(true);
-                setFormData({ name: '', email: '', message: '' });
-                toast.success('message received successfully')
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    return (
-        <section className="bg-gray-50 dark:bg-gray-900 py-10 px-6 rounded-lg shadow-md">
-            <Helmet>
-                <title>Contact us - Volunteer-management</title>
-            </Helmet>
-            <h2 className="text-3xl font-bold text-black text-center mb-6">Contact Us</h2>
-            <p className="text-gray-600 text-lg text-center mb-6">
-                Have any questions or want to get involved? Reach out to us!
+  return (
+    <div className="max-w-7xl mx-auto p-4 flex flex-col lg:flex-row justify-between items-start mt-10 rounded-xl mb-10 bg-gray-100">
+      {/* Contact Info Section */}
+      <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
+        <h2 className="text-2xl font-bold mb-4">Contact us</h2>
+        <p className="text-gray-600 mb-6">
+          Odio ultrices ut. Etiam ac erat ut enim maximus accumsan vel ac nisl.
+          Duis feugiat bibendum orci, non elementum urna. Cras sit amet sapien
+          aliquam.
+        </p>
+        <div className="space-y-4">
+          <div>
+            <h3 className="text-indigo-500 font-semibold">Address</h3>
+            <p className="text-gray-600">
+              1481 Dhaka
+              <br />
+              Bangladesh, CA 931
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          </div>
+          <div>
+            <h3 className="text-indigo-500 font-semibold">Phone</h3>
+            <p className="text-gray-600">+53 345 7953 32453</p>
+          </div>
+          <div>
+            <h3 className="text-indigo-500 font-semibold">E-mail</h3>
+            <p className="text-gray-600">yourmail@gmail.com</p>
+          </div>
+        </div>
+      </div>
 
-                <div className="bg-white p-4 rounded-lg shadow-md">
-                    <h3 className="text-xl font-semibold text-indigo-700">Contact Details</h3>
-                    <p className="text-gray-600 mt-2"><strong>Email:</strong> support@volunteer.org</p>
-                    <p className="text-gray-600 mt-2"><strong>Phone:</strong> +123-456-7890</p>
-                    <p className="text-gray-600 mt-2"><strong>Address:</strong> 123 Volunteer, Bangladesh</p>
-                </div>
-
-
-                <div className="bg-white p-4 rounded-lg shadow-md">
-                    <h3 className="text-xl font-semibold text-indigo-700">Get in Touch</h3>
-                    <form className="mt-4" onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            placeholder="Your Name"
-                            className="w-full mb-3 px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                            required
-                        />
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            placeholder="Your Email"
-                            className="w-full mb-3 px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                            required
-                        />
-                        <textarea
-                            name="message"
-                            value={formData.message}
-                            onChange={handleChange}
-                            placeholder="Your Message"
-                            rows="4"
-                            className="w-full mb-3 px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                            required
-                        ></textarea>
-                        <button
-                            type="submit"
-                            className="w-full px-4 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800"
-                        >
-                            Send Message
-                        </button>
-                       
-                    </form>
-                </div>
-            </div>
-        </section>
-    );
+      {/* Form Section */}
+      <div className="w-full lg:w-1/2 bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold mb-4">Leave a Reply</h2>
+        <form ref={formRef} onSubmit={sendEmail}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+            <input
+              type="text"
+              name="user_name"
+              placeholder="Name"
+              className="border border-gray-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              required
+            />
+            <input
+              type="email"
+              name="user_email"
+              placeholder="Email"
+              className="border border-gray-300 p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              required
+            />
+          </div>
+          <input
+            type="text"
+            name="subject"
+            placeholder="Subject"
+            className="border border-gray-300 p-3 rounded-lg w-full mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+            required
+          />
+          <textarea
+            name="message"
+            placeholder="Message"
+            rows="4"
+            className="border border-gray-300 p-3 rounded-lg w-full mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+            required
+          ></textarea>
+          <button
+            type="submit"
+            className="bg-indigo-700 text-white font-semibold py-2 px-6 rounded-lg"
+          >
+            Send
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default ContactUs;
