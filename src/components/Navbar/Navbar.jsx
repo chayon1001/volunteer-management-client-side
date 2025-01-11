@@ -11,7 +11,7 @@ const Navbar = () => {
     const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
     const [isHovered, setIsHovered] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile menu toggle
     const location = useLocation();
 
     const handleThemeToggle = () => {
@@ -20,7 +20,7 @@ const Navbar = () => {
 
     useEffect(() => {
         setIsDropdownOpen(false);
-        setIsMenuOpen(false);
+        setIsMenuOpen(false); // Close mobile menu on navigation
     }, [location]);
 
     const handleLogOut = () => {
@@ -35,19 +35,22 @@ const Navbar = () => {
     };
 
     const linkClasses = ({ isActive }) =>
-        isActive ? 'text-indigo-700 font-semibold' : 'hover:text-indigo-600';
+        isActive
+            ? 'text-indigo-700 font-semibold '
+            : 'hover:text-indigo-600';
 
     return (
         <nav className="sticky top-0 z-50 bg-white dark:bg-gray-800 text-black dark:text-white shadow-md py-4">
-            <div className="container mx-auto flex justify-around items-center gap-6 pb-72 md:pb-0">
+            <div className="max-w-7xl mx-auto flex   items-center justify-around md:justify-between gap-6 pb-72 md:pb-0">
+
                 {/* Logo */}
-                <div className="text-2xl text-indigo-700 font-semibold cursor-pointer flex items-center gap-1">
+                <div className="text-2xl text-indigo-700 font-semibold cursor-pointer flex  items-center gap-1">
                     <FaPersonFalling />
                     <NavLink to="/">Volunteero</NavLink>
                 </div>
 
                 {/* Mobile Hamburger Menu Button */}
-                <div className="md:hidden">
+                <div className="md:hidden ">
                     <button
                         onClick={() => setIsMenuOpen((prev) => !prev)}
                         className="text-2xl focus:outline-none"
@@ -58,53 +61,59 @@ const Navbar = () => {
 
                 {/* Navigation Links */}
                 <div
-                    className={`absolute md:static top-20 left-0 px-14 md:px-0 w-full md:w-auto bg-white dark:bg-gray-800 z-10 md:flex md:items-center md:gap-4 md:opacity-100 transition-all ${
-                        isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible md:visible'
-                    }`}
+                    className={`absolute md:static top-20 left-0 px-14 md:px-0 w-full md:w-auto bg-white dark:bg-gray-800 z-10 md:flex md:items-center md:gap-4 md:opacity-100 transition-all ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible md:visible'
+                        }`}
                 >
-                    <NavLink to="/" className={linkClasses}>
+                    <NavLink to="/" className={({ isActive }) => `${isActive ? 'text-indigo-700 font-semibold' : 'hover:text-indigo-600'} block md:py-0`}>
                         Home
                     </NavLink>
-
-                    {user && (
-                        <>
-                            <NavLink to="/allVolunteer" className={linkClasses}>
+                    {
+                        user && <>
+                            <NavLink to="/allVolunteer" className={({ isActive }) => `${isActive ? 'text-indigo-700 font-semibold' : 'hover:text-indigo-600'} block md:py-0`}>
                                 All Volunteer
                             </NavLink>
-                            <NavLink to="/myVolunteerRequestPost" className={linkClasses}>
+                            <NavLink to="/myVolunteerRequestPost" className={({ isActive }) => `${isActive ? 'text-indigo-700 font-semibold' : 'hover:text-indigo-600'} block`}>
                                 My Volunteer Request Post
                             </NavLink>
                         </>
-                    )}
-
-                    <NavLink to="/blogSection" className={linkClasses}>
+                    }
+                    <NavLink to="/blogSection" className={({ isActive }) => `${isActive ? 'text-indigo-700 font-semibold' : 'hover:text-indigo-600'} block`}>
                         Blog
                     </NavLink>
-                    <NavLink to="/contactUs" className={linkClasses}>
+                    <NavLink to="/contactUs" className={({ isActive }) => `${isActive ? 'text-indigo-700 font-semibold' : 'hover:text-indigo-600'} block`}>
                         Contact Us
                     </NavLink>
 
                     {/* My Profile Dropdown */}
-                    {user && (
-                        <div className="relative">
-                            <button
-                                onClick={() => setIsDropdownOpen((prev) => !prev)}
-                                className="block hover:text-indigo-700"
-                            >
-                                My Profile
-                            </button>
-                            {isDropdownOpen && (
-                                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg z-20">
-                                    <NavLink to="/addVolunteer" className="block px-2 py-2 hover:text-indigo-500">
-                                        Add Volunteer Need Post
-                                    </NavLink>
-                                    <NavLink to="/manageMyPosts" className="block px-2 py-2 hover:text-indigo-500">
-                                        Manage My Posts
-                                    </NavLink>
-                                </div>
-                            )}
-                        </div>
-                    )}
+                    {
+                        user && <>
+
+                            <div className="relative">
+                                <button
+                                    onClick={() => setIsDropdownOpen((prev) => !prev)}
+                                    className="block   hover:text-indigo-700"
+                                >
+                                    My Profile
+                                </button>
+                                {isDropdownOpen && (
+                                    <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg z-20">
+                                        <NavLink
+                                            to="/addVolunteer"
+                                            className="block px-2 py-2 hover:text-indigo-500"
+                                        >
+                                            Add Volunteer need Post
+                                        </NavLink>
+                                        <NavLink
+                                            to="/manageMyPosts"
+                                            className="block px-2 py-2 hover:text-indigo-500"
+                                        >
+                                            Manage My Posts
+                                        </NavLink>
+                                    </div>
+                                )}
+                            </div>
+                        </>
+                    }
 
                     {/* User Profile */}
                     <div className="block px-2 py-2 md:py-0">
@@ -113,18 +122,17 @@ const Navbar = () => {
                                 <div
                                     className="relative"
                                     onMouseEnter={() => setIsHovered(true)}
-                                    onMouseLeave={() => setIsHovered(false)}
+                                    onMouseLeave={() => setIsHovered(false)} // Fixed this line for hover
                                 >
                                     <img
                                         src={user.photoURL}
-                                        alt="Profile"
+                                        alt=""
                                         className="w-10 h-10 rounded-full border-2 border-indigo-700"
                                     />
+
                                     {isHovered && (
                                         <div className="absolute top-12 left-0 z-10 bg-gray-400 text-white px-2 py-1 rounded-md shadow-lg">
-                                            <div className="mb-2 px-2 w-[100px]">
-                                                {user.displayName || 'User'}
-                                            </div>
+                                            <div className="mb-2 px-2 w-[100px]">{user.displayName || 'User'}</div>
                                             <button
                                                 onClick={handleLogOut}
                                                 className="w-full px-2 py-2 bg-indigo-700 rounded-lg text-white font-semibold"
