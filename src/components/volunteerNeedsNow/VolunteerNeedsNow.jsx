@@ -25,11 +25,11 @@ const VolunteerNeedsNow = () => {
             
 
          
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {posts.map((post) => (
                     <div
                         key={post._id}
-                        className="bg-white shadow-md rounded-lg transition-transform transform  hover:scale-105"  >
+                        className="bg-gray-200 shadow-md rounded-lg transition-transform transform  hover:scale-105"  >
                         <img
                             src={post.thumbnail}
                             className="h-48 w-full object-cover"
@@ -42,7 +42,7 @@ const VolunteerNeedsNow = () => {
                                 className="mt-4 px-4 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800"
                                 onClick={() => navigate(`/volunteers/${post._id}`)}
                             >
-                                View Details
+                               See More
                             </button>
                         </div>
                     </div>
