@@ -38,7 +38,7 @@ const Navbar = () => {
     isActive ? "text-indigo-700 font-semibold " : "hover:text-indigo-600";
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800 text-black dark:text-white shadow-md py-4">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800 text-black dark:text-white  py-6">
       <div className="max-w-7xl mx-auto flex   items-center justify-around md:justify-between gap-6 pb-72 md:pb-0">
         {/* Logo */}
         <div className="text-2xl text-indigo-700 font-semibold cursor-pointer flex  items-center gap-1">

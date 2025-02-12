@@ -22,7 +22,7 @@ const VolunteerNeedsNow = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h2 className="text-3xl font-bold text-center text-black mb-8 dark:text-gray-300">
+      <h2 className="text-3xl font-bold text-center text-black mb-8 dark:text-gray-300 dark:font-bold">
         Volunteer Needs Now
       </h2>
 

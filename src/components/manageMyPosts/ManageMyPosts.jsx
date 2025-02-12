@@ -72,7 +72,9 @@ const ManageMyPosts = () => {
       <Helmet>
         <title>ManageMyPost - Volunteer-management</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-center mb-8">Manage my post</h2>
+      <h2 className="text-3xl font-bold text-center mb-8 dark:text-gray-300 dark:font-bold">
+        Manage my post
+      </h2>
       {posts.length === 0 ? (
         <p className="text-center text-gray-600">
           No volunteer posts found. Create one to get started.
@@ -95,7 +97,7 @@ const ManageMyPosts = () => {
             </thead>
             <tbody>
               {posts.map((post) => (
-                <tr key={post._id} className="hover:bg-gray-50">
+                <tr key={post._id} className="">
                   <td className="border border-gray-300 px-4 py-2">
                     {post.title}
                   </td>
