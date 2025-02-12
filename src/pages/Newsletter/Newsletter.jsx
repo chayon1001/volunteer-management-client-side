@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { toast } from "react-toastify";
 
 const Newsletter = () => {
@@ -23,7 +24,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="bg-gray-100 dark:bg-gray-800 py-12 px-6">
+    <section className="bg-gray-100 max-w-7xl mx-auto dark:bg-gray-800 py-12 px-6">
       <Helmet>
         <title>Newsletter - Volunteer-management</title>
       </Helmet>

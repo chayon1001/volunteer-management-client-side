@@ -22,7 +22,7 @@ const VolunteerNeedsNow = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h2 className="text-3xl font-bold text-center text-black mb-8">
+      <h2 className="text-3xl font-bold text-center text-black mb-8 dark:text-gray-300">
         Volunteer Needs Now
       </h2>
 
@@ -66,7 +66,7 @@ const VolunteerNeedsNow = () => {
 
           <div className="text-center mt-8">
             <button
-              className="px-6 py-2 border-2 border-black text-black rounded-md"
+              className="px-6 py-2 border-2 border-black dark:border-gray-300 text-black dark:text-gray-200 rounded-md"
               onClick={() => navigate("/allVolunteer")}
             >
               See All

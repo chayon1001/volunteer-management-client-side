@@ -1,16 +1,18 @@
-import React from 'react';
-import Navbar from '../components/Navbar/Navbar';
-import { Outlet } from 'react-router-dom';
-import Footer from '../components/footer/Footer';
+import React from "react";
+import Navbar from "../components/Navbar/Navbar";
+import { Outlet } from "react-router-dom";
+import Footer from "../components/footer/Footer";
 
 const MainLayout = () => {
-    return (
-        <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
-            <Navbar></Navbar>
-            <Outlet></Outlet>
-            <Footer></Footer>
-        </div>
-    );
+  return (
+    <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
+      <Navbar></Navbar>
+      <div className="mt-24 pb-5">
+        <Outlet></Outlet>
+      </div>
+      <Footer></Footer>
+    </div>
+  );
 };
 
 export default MainLayout;
