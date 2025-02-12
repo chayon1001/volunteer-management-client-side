@@ -100,7 +100,7 @@ const Navbar = () => {
                   } block`
                 }
               >
-                My Volunteer Request Post
+                My Volunteer Request
               </NavLink>
             </>
           )}
@@ -127,6 +127,18 @@ const Navbar = () => {
             }
           >
             Contact Us
+          </NavLink>
+          <NavLink
+            to="/newsletter"
+            className={({ isActive }) =>
+              `${
+                isActive
+                  ? "text-indigo-700 font-semibold"
+                  : "hover:text-indigo-600"
+              } block`
+            }
+          >
+            Newsletter
           </NavLink>
 
           {/* My Profile Dropdown */}
