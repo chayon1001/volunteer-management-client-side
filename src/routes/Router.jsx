@@ -1,4 +1,3 @@
-
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import ErrorElement from "../pages/ErrorElement";
@@ -16,78 +15,87 @@ import VolunteerRequestForm from "../components/volunteerRequestForm/VolunteerRe
 import UpdatePost from "../components/updatePost/UpdatePost";
 import MyVolunteerRequestPost from "../components/myVolunteerRequestPost/MyVolunteerRequestPost";
 import PrivateRoute from "./PrivateRoute";
+import Newsletter from "../pages/Newsletter/Newsletter";
 
 export const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <MainLayout></MainLayout>,
+    errorElement: <ErrorElement></ErrorElement>,
+    children: [
+      {
         path: "/",
-        element: <MainLayout></MainLayout>,
-        errorElement: <ErrorElement></ErrorElement>,
-        children: [
-            {
-                path: '/',
-                element: <Home></Home>
-            },
-            {
-                path: "/allVolunteer",
-                element: <AllVolunteers></AllVolunteers>
-            },
+        element: <Home></Home>,
+      },
+      {
+        path: "/allVolunteer",
+        element: <AllVolunteers></AllVolunteers>,
+      },
 
-            {
-                path: "/blogSection",
-                element: <BlogSection></BlogSection>
-            },
+      {
+        path: "/blogSection",
+        element: <BlogSection></BlogSection>,
+      },
 
-            {
-                path: "/contactUs",
-                element: <ContactUs></ContactUs>
-            },
+      {
+        path: "/contactUs",
+        element: <ContactUs></ContactUs>,
+      },
+      {
+        path: "/newsletter",
+        element: <Newsletter></Newsletter>,
+      },
 
+      {
+        path: "/addVolunteer",
+        element: (
+          <PrivateRoute>
+            <AddVolunteerPost></AddVolunteerPost>
+          </PrivateRoute>
+        ),
+      },
 
+      {
+        path: "/volunteers/:id",
+        element: (
+          <PrivateRoute>
+            <VolunteerPostDetail></VolunteerPostDetail>
+          </PrivateRoute>
+        ),
+      },
 
-            {
-                path: "/addVolunteer",
-                element: <PrivateRoute>
-                    <AddVolunteerPost></AddVolunteerPost>
-                </PrivateRoute>
-
-            },
-
-            {
-                path: '/volunteers/:id',
-                element: <PrivateRoute>
-                    <VolunteerPostDetail></VolunteerPostDetail>
-                </PrivateRoute>
-            },
-
-            {
-                path: "/volunteer-request/:id",
-                element: <VolunteerRequestForm></VolunteerRequestForm>
-
-            },
-            {
-                path: '/manageMyPosts',
-                element: <PrivateRoute>
-                    <ManageMyPosts></ManageMyPosts>
-                </PrivateRoute>
-            },
-            {
-                path: '/update/:id',
-                element: <PrivateRoute>
-                    <UpdatePost></UpdatePost>
-                </PrivateRoute>
-            },
-            {
-                path: '/myVolunteerRequestPost',
-                element: <MyVolunteerRequestPost></MyVolunteerRequestPost>
-            },
-            {
-                path: '/auth/register',
-                element: <Register></Register>
-            },
-            {
-                path: '/auth/login',
-                element: <Login></Login>
-            }
-        ]
-    },
+      {
+        path: "/volunteer-request/:id",
+        element: <VolunteerRequestForm></VolunteerRequestForm>,
+      },
+      {
+        path: "/manageMyPosts",
+        element: (
+          <PrivateRoute>
+            <ManageMyPosts></ManageMyPosts>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update/:id",
+        element: (
+          <PrivateRoute>
+            <UpdatePost></UpdatePost>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myVolunteerRequestPost",
+        element: <MyVolunteerRequestPost></MyVolunteerRequestPost>,
+      },
+      {
+        path: "/auth/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/auth/login",
+        element: <Login></Login>,
+      },
+    ],
+  },
 ]);
